@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.mapper.OptionMapper">
+    <resultMap id="optionMap" type="com.blog.model.Option">
+        <id column="name" property="name"/>
+        <result column="value" property="value"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.blog.model.Option">
+        insert into t_options t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != '' and name != null">t.name,</if>
+            <if test="value != '' and value != null">t.value,</if>
+            <if test="description != '' and description != null">t.description,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="name != '' and name != null">#{name},</if>
+            <if test="value != '' and value != null">#{value},</if>
+            <if test="description != '' and description != null">#{description},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByName" parameterType="com.blog.model.Option">
+            update t_options t
+            <set>
+                t.value=#{option.value}
+            </set>
+            where t.name=#{option.name}
+    </update>
+
+    <select id="findAll" resultMap="optionMap">
+        select * from t_options
+    </select>
+</mapper>

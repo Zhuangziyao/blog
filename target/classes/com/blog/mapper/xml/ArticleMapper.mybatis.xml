@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.mapper.ArticleMapper">
+    <resultMap id="articleMap" type="com.blog.model.Article">
+        <id property="cid" column="cid" jdbcType="INTEGER"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="slug" column="slug" jdbcType="VARCHAR"/>
+        <result property="created" column="created" jdbcType="INTEGER"/>
+        <result property="modified" column="modified" jdbcType="INTEGER"/>
+        <result property="authorId" column="author_id" jdbcType="INTEGER"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="tags" column="tags" jdbcType="VARCHAR"/>
+        <result property="categories" column="categories" jdbcType="VARCHAR"/>
+        <result property="hits" column="hits" jdbcType="INTEGER"/>
+        <result property="commentsNum" column="comments_num" jdbcType="INTEGER"/>
+        <result property="allowComment" column="allow_comment" jdbcType="BIT"/>
+        <result property="allowPing" column="allow_ping" jdbcType="BIT"/>
+        <result property="allowFeed" column="allow_feed" jdbcType="BIT" />
+        <result property="content" column="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <resultMap id="archiveMap" type="com.blog.model.Archive">
+        <id property="date" column="date"/>
+        <result property="count" column="count" />
+    </resultMap>
+
+    <select id="getArticlesCount" resultType="Integer">
+    	select count(*) from t_contents
+    </select>
+
+    <select id="findArticles" resultMap="articleMap">
+        select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+    	comments_num, allow_comment, allow_ping, allow_feed
+    	from t_contents
+    	where status='publish'
+    	order by created desc
+    	limit #{start},#{pageSize}
+    </select>
+
+    <select id="findArticleById" resultMap="articleMap">
+    	select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+    	comments_num, allow_comment, allow_ping, allow_feed, content
+    	from t_contents
+    	where cid=#{cid} limit 1
+    </select>
+
+    <select id="findArticleByWord" resultMap="articleMap">
+    	select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+    	comments_num, allow_comment, allow_ping, allow_feed
+    	from t_contents
+    	where title like concat('%',#{word},'%')
+    </select>
+
+    <select id="findAllArchives" resultMap="archiveMap">
+    	select FROM_UNIXTIME(created, '%Y年%m月') as date, count(*) as count
+    	from t_contents
+    	where status = 'publish'
+    	group by date
+    	order by date desc
+    </select>
+
+    <select id="findArticleByDate" resultMap="articleMap">
+	    select cid,title,created
+	    from t_contents
+	    where FROM_UNIXTIME(created, '%Y年%m月')=#{date}
+    </select>
+
+    <select id="findArticleBySlug" resultMap="articleMap">
+   		select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+    	comments_num, allow_comment, allow_ping, allow_feed,content
+    	from t_contents
+    	where slug=#{slug}
+    </select>
+
+    <select id="findArticleByCategory" resultMap="articleMap">
+    	select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+    	comments_num, allow_comment, allow_ping, allow_feed
+    	from t_contents
+    	where categories=#{category} and status='publish'
+    </select>
+
+    <select id="findArticleByTag" resultMap="articleMap">
+    	select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+    	comments_num, allow_comment, allow_ping, allow_feed
+    	from t_contents
+    	where tags like concat('%',#{tag},'%') and status='publish'
+    </select>
+
+    <select id="findArticleOrderByCreate" resultMap="articleMap">
+        select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+    	comments_num, allow_comment, allow_ping, allow_feed
+    	from t_contents
+    	order by created desc
+    	limit 0,5
+    </select>
+
+    <delete id="delete">
+        delete from t_contents where cid=#{cid}
+    </delete>
+
+    <select id="findAllArticles" resultMap="articleMap">
+        select * from t_contents
+    </select>
+
+    <insert id="insert" parameterType="com.blog.model.Article">
+        insert into t_contents
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''"> title,</if>
+            <if test="slug != null and slug != ''">slug,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="authorId != null and authorId != ''">author_id,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="tags != null and tags != ''">tags,</if>
+            <if test="categories != null ">categories,</if>
+            <if test="allowPing != null ">allow_ping,</if>
+            <if test="allowComment != null ">allow_comment,</if>
+            <if test="allowFeed != null and allowFeed != ''">allow_feed,</if>
+            <if test="created != null and created != ''">created,</if>
+            <if test="modified != null and modified != ''">modified,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="title != null and title != ''"> #{title},</if>
+            <if test="slug != null and slug != ''">#{slug},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="authorId != null and authorId != ''">#{authorId},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="tags != null and tags != ''">#{tags},</if>
+            <if test="categories != null and categories != ''">#{categories},</if>
+            <if test="allowPing != null">#{allowPing,jdbcType=BIT},</if>
+            <if test="allowComment != null">#{allowComment,jdbcType=BIT},</if>
+            <if test="allowFeed != null">#{allowFeed,jdbcType=BIT},</if>
+            <if test="created != null and created != ''">#{created},</if>
+            <if test="modified != null and modified != ''">#{modified},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.blog.model.Article">
+        update t_contents
+        <set>
+            <if test="title != null and title != ''"> title=#{title},</if>
+            <if test="slug != null and slug != ''">slug=#{slug},</if>
+            <if test="content != null and content != ''">content=#{content},</if>
+            <if test="authorId != null and authorId != ''">author_id=#{authorId},</if>
+            <if test="type != null and type != ''">type=#{type},</if>
+            <if test="status != null and status != ''">status=#{status},</if>
+            <if test="tags != null and tags != ''">tags=#{tags},</if>
+            <if test="categories != null and categories != ''">categories=#{categories},</if>
+            <if test="allowPing != null">allow_ping=#{allowPing},</if>
+            <if test="allowComment != null">allow_comment=#{allowComment},</if>
+            <if test="allowFeed != null ">allow_feed=#{allowFeed},</if>
+            <if test="modified != null and modified != ''">modified=#{modified},</if>
+        </set>
+        where cid=#{cid}
+    </update>
+
+    <update id="updateHit">
+        update t_contents
+        set hits=hits+1
+        where cid=#{cid}
+    </update>
+
+    <update id="updateComment">
+        update t_contents
+        set comments_num=comments_num+1
+        where cid=#{cid}
+    </update>
+
+    <select id="findArticleByCreated" resultMap="articleMap">
+        select * from t_contents
+        where created=#{created}
+    </select>
+</mapper>

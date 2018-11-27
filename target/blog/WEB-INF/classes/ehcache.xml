@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+    <defaultCache maxElementsInMemory="10000"
+                  maxElementsOnDisk="1000" eternal="false" overflowToDisk="false"
+                  timeToIdleSeconds="300" timeToLiveSeconds="600" maxEntriesLocalHeap="10000"
+                  maxEntriesLocalDisk="10000000" />
+    <cache name="ipCache" maxElementsInMemory="3000" eternal="false"
+           overflowToDisk="false" timeToLiveSeconds="3600" timeToIdleSeconds="3600" />
+</ehcache>

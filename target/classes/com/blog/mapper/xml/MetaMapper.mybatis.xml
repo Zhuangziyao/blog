@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.mapper.MetaMapper">
+    <resultMap id="metaMap" type="com.blog.model.Meta">
+        <id column="mid" property="mId"/>
+        <result column="name" property="name" />
+        <result column="slug" property="slug" />
+        <result column="type" property="type" />
+        <result column="description" property="description" />
+        <result column="sort" property="sort" />
+    </resultMap>
+
+    <resultMap id="metaDtoMap" type="com.blog.model.MetaDto" extends="metaMap">
+        <result column="count" property="count"/>
+    </resultMap>
+    <!-- 根据type查找数据， -->
+    <select id="findMetaByType" resultMap="metaMap">
+        select * from t_metas
+        where type=#{type}
+        order by sort
+    </select>
+
+    <delete id="deleteById">
+        delete from t_metas where mid=#{mid}
+    </delete>
+
+    <update id="updateById" parameterType="com.blog.model.Meta">
+        update t_metas
+        <set>
+            <if test="name != '' and name != null">
+                name=#{name},
+            </if>
+            <if test="slug != '' and slug != null">
+                slug=#{slug},
+            </if>
+            <if test="description != null and description != ''">
+                description=#{description},
+            </if>
+            <if test="type != '' and type != null">
+                type=#{type},
+            </if>
+            <if test="sort != '' and sort != null">
+                sort=#{sort},
+            </if>
+        </set>
+        where mid=#{mId}
+    </update>
+
+    <insert id="insert" parameterType="com.blog.model.Meta">
+        insert into t_metas
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != '' and name != null">name,</if>
+            <if test="slug != '' and slug != null">slug,</if>
+            <if test="description != '' and description != null">description,</if>
+            <if test="sort != '' and sort != null">sort,</if>
+            <if test="type != '' and type != null">type,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="name != '' and name != null">#{name},</if>
+            <if test="slug != '' and slug != null">#{slug},</if>
+            <if test="description != '' and description != null">#{description},</if>
+            <if test="sort != '' and sort != null">#{sort},</if>
+            <if test="type != '' and type != null">#{type},</if>
+        </trim>
+    </insert>
+
+    <select id="findCountByType" resultType="int">
+        select count(*)
+        from t_metas
+        where type=#{type}
+    </select>
+
+    <select id="findMetaDtoByType" resultMap="metaDtoMap">
+        select t.* from t_metas t where type=#{type}
+    </select>
+
+    <select id="findCountByName" resultType="int">
+        select count(*) from t_metas
+        where name=#{name} and type='category'
+    </select>
+</mapper>
