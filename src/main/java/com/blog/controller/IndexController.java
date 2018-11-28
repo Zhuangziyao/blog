@@ -8,6 +8,7 @@ import com.blog.model.Meta;
 import com.blog.service.CommentService;
 import com.blog.service.IndexService;
 import com.blog.service.MetaService;
+import com.blog.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class IndexController {
@@ -28,6 +31,9 @@ public class IndexController {
 
 	@Autowired
 	private MetaService metaService;
+
+	@Autowired
+	private SettingService settingService;
 	
 	@RequestMapping("/")
 	public String index(HttpServletRequest request,@RequestParam(value="limit",defaultValue="12") int limit) {
@@ -129,6 +135,15 @@ public class IndexController {
 			return "success";
 		else
 			return "failed";
+	}
+
+	@RequestMapping("/beianhao")
+	@ResponseBody
+	public Map<String,String> getBeiAnHao(){
+		Map<String,String> map=new HashMap<>();
+		map.put("beianhao",settingService.findBeiAnHao());
+		//System.out.println(beianhao);
+		return map;
 	}
 
 	//从request中获取ip

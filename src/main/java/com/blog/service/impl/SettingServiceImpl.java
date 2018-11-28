@@ -31,4 +31,9 @@ public class SettingServiceImpl implements SettingService {
     public List<Option> findAll() {
         return optionMapper.findAll();
     }
+
+    @Override
+    public String findBeiAnHao() {
+        return optionMapper.findRecord();
+    }
 }

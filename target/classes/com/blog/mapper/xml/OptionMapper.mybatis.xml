@@ -32,4 +32,8 @@
     <select id="findAll" resultMap="optionMap">
         select * from t_options
     </select>
+
+    <select id="findRecord" resultType="string">
+        select value from t_options where name='site_record'
+    </select>
 </mapper>

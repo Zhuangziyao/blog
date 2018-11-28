@@ -20,13 +20,34 @@
                             </a>
                             <br>
                             <p>©版权所有 <a href="">BPM</a> 保留一切权利</p>
+                            <p class="beianhao"><a href="http://www.miitbeian.gov.cn/"></a></p>
                             <br>
-                            <p>...</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+<script type="text/javascript" src="<%=path%>/static/user/js/jquery-3.3.1.min.js"></script>
+<script type="">
+    $.ajax({
+        type:'GET',
+        url:'./beianhao',
+        dataType:'json',
+        success:function(data){
+            if(data!=null)
+                $(".beianhao a").text(data['beianhao']);
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+            // 状态码
+            console.log(XMLHttpRequest.status);
+            // 状态
+            console.log(XMLHttpRequest.readyState);
+            // 错误信息
+            console.log(textStatus);
+        }
+
+    })
+</script>
 </body>
 </html>

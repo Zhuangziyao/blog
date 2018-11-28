@@ -124,7 +124,6 @@
                     $('#textarea').val('');
                 }
             }
-
         })
     }
 </script>
