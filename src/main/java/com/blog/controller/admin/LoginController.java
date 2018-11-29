@@ -1,6 +1,8 @@
 package com.blog.controller.admin;
 
+import com.blog.model.Log;
 import com.blog.model.User;
+import com.blog.service.LogService;
 import com.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -19,6 +22,9 @@ public class LoginController {
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private LogService logService;
 	
 	@RequestMapping("")
 	public String index(HttpServletRequest request) {
@@ -27,7 +33,7 @@ public class LoginController {
 	//登录请求
 	@RequestMapping("/login")
 	@ResponseBody
-	public String login(HttpServletRequest request,HttpServletResponse response) {
+	public String login(HttpServletRequest request) {
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
 		List<User> list=userService.findUserByNameAndPwd(username,password);
@@ -36,7 +42,13 @@ public class LoginController {
 			//存到session
 			HttpSession session=request.getSession();
 			session.setAttribute("user",list.get(0));
-			
+			Log log=new Log();
+			log.setAction("登录后台");
+			log.setAuthorId(list.get(0).getuId());
+			Date date=new Date();
+			log.setCreated((int)(date.getTime()/1000));
+			log.setIp(getIpAddrByRequest(request));
+			logService.insert(log);
 			return "SUCCESS";
 		}else {
 			return "FAILED";
@@ -61,5 +73,19 @@ public class LoginController {
         session.setAttribute("user",null);
 	    return "redirect:/admin";
     }
+
+	public static String getIpAddrByRequest(HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
+	}
 
 }

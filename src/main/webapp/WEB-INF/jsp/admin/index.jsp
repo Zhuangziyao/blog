@@ -1,4 +1,3 @@
-<%@ page import="com.blog.common.util.TimeTransform" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <% String path=request.getContextPath();%>
@@ -139,7 +138,7 @@
             var logs=data.logs;
             for(var i=0;i<logs.length;i++){
                 l+="<li class='list-group-item'>";
-                l+="<span>"+timestamp2time(logs[i].created)+" => "+logs[i].action+"</span></li>";
+                l+="<span>"+timestamp2time(logs[i].created)+" "+logs[i].authorId+"=>"+logs[i].action+"</span></li>";
             }
             $("#logs").append(l);
         },

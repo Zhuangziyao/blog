@@ -5,6 +5,7 @@
 # IntelliJ project files
 .idea
 *.iml
+/src/main/resources/developLog.txt
 /target/
 out
 gen

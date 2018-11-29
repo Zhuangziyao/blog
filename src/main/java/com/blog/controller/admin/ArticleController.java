@@ -1,8 +1,11 @@
 package com.blog.controller.admin;
 
 import com.blog.model.Article;
+import com.blog.model.Log;
 import com.blog.model.Meta;
+import com.blog.model.User;
 import com.blog.service.IndexService;
+import com.blog.service.LogService;
 import com.blog.service.MetaService;
 import com.blog.service.RelationshipService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static com.blog.controller.IndexController.getIpAddrByRequest;
 
 /**
  * Description:article controller
@@ -32,6 +38,9 @@ public class ArticleController {
 
     @Autowired
     private RelationshipService relationshipService;
+
+    @Autowired
+    private LogService logService;
 
     @RequestMapping("")
     public String articles(HttpServletRequest request){
@@ -67,7 +76,7 @@ public class ArticleController {
     //修改文章
     @RequestMapping("/modify")
     @ResponseBody
-    public String modifyArticle(Article article ){
+    public String modifyArticle(HttpServletRequest request,Article article ){
         Date now=new Date();
         article.setCreated((int)(now.getTime()/1000));
         article.setModified((int)(now.getTime()/1000));
@@ -102,18 +111,36 @@ public class ArticleController {
                 }
             }
         }
-        if(result == 1)
+        if(result == 1){
+            HttpSession session=request.getSession();
+            User user=(User)session.getAttribute("user");
+            Log log=new Log();
+            log.setAction("修改文章");
+            log.setAuthorId(user.getuId());
+            log.setCreated((int)(now.getTime()/1000));
+            logService.insert(log);
             return "success";
+        }
+
         else
             return "failed";
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String deleteArticle(@RequestParam() int cid){
+    public String deleteArticle(HttpServletRequest request,@RequestParam() int cid){
         int result=indexService.delete(cid);
-        if(result == 1)
+        if(result == 1){
+            HttpSession session=request.getSession();
+            User user=(User)session.getAttribute("user");
+            Log log=new Log();
+            log.setAction("删除文章");
+            log.setAuthorId(user.getuId());
+            Date date=new Date();
+            log.setCreated((int)(date.getTime()/1000));
+            logService.insert(log);
             return "success";
+        }
         else
             return "failed";
     }
