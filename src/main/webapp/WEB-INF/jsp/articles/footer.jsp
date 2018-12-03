@@ -32,7 +32,7 @@
 <script type="">
     $.ajax({
         type:'GET',
-        url:'http://zhuyao.site/beianhao',
+        url:'https://zhuyao.site/beianhao',
         dataType:'json',
         success:function(data){
             if(data!=null)
