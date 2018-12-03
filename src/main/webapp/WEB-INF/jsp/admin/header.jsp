@@ -39,11 +39,13 @@
                     <span class="clearfix"></span>
                 </div>
 
-                <ul class="nav navbar-nav navbar-right pull-right">
-                    <li class="dropdown">
+                <ul class="nav navbar-nav navbar-right pull-right" style="height: 60px">
+                    <li class="dropdown" style="height: 60px">
                         <a href="" class="dropdown-toggle profile" data-toggle="dropdown"
-                           aria-expanded="true"><img src="<%=path%>/static/admin/images/user/user-avatar.png" alt="user-img"
-                                                     class="img-circle"/> </a>
+                           aria-expanded="true" style="width:60px;margin-right: 15px">
+                            <img src="<%=path%>/static/admin/images/user/user-avatar.png" alt="user-img"
+                                                     class="img-circle" style="margin-top:5px;width: 60px;height: 60px"/>
+                        </a>
                         <ul class="dropdown-menu">
                             <li>
 	                            <a href="../" target="_blank">
@@ -63,8 +65,8 @@
     <div class="sidebar-inner slimscrollleft">
         <div id="sidebar-menu">
             <ul>
-                <li >
-                    <a href="<%=path %>/admin/index" class="active">
+                <li>
+                    <a href="<%=path %>/admin/index">
                         <i class="fa fa-dashboard waves-effect" aria-hidden="true"></i>
                         <span> 仪表盘 </span></a>
                 </li>
@@ -114,16 +116,28 @@
 <script type="text/javascript"src="<%=path%>/static/user/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	//动态修改active状态
-	$('#sidebar-menu ul li a').click(function(){
-
-        $(this).addClass("active");
-        $(this).parent().siblings().children("a").removeClass("active");
-        //$(this).children("a").addClass("active");
-        //$(this).siblings().children().removeClass("active");
-		//$(this).addClass("active");
-		//$(this).children().removeClass("active");
-	});
-
+    $(document).ready(function(){
+        var url=window.location.href;
+        console.log(url);
+        if(url.indexOf("index")!=-1){
+            $("#side-menu ul li:eq(0) a").addClass("active");
+        }else if(url.indexOf("article/publish")!=-1){
+            $("#side-menu ul li:eq(1) a").addClass("active");
+        }else if(url.indexOf("/article")!=-1){
+            $("#side-menu ul li:eq(2) a").addClass("active");
+        }else if(url.indexOf("user")!=-1){
+            $("#side-menu ul li:eq(3) a").addClass("active");
+        }else if(url.indexOf("comments")!=-1){
+            $("#side-menu ul li:eq(4) a").addClass("active");
+        }else if(url.indexOf("category")!=-1){
+            $("#side-menu ul li:eq(5) a").addClass("active");
+        }else if(url.indexOf("attach")!=-1){
+            $("#side-menu ul li:eq(6) a").addClass("active");
+        }else if(url.indexOf("links")!=-1){
+            $("#side-menu ul li:eq(7) a").addClass("active");
+        }else if(url.indexOf("setting")!=-1){
+            $("#side-menu ul li:eq(8) a").addClass("active");
+        }})
 </script>
 </body>
 </html>

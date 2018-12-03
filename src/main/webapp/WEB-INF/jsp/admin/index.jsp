@@ -10,7 +10,7 @@
 </head>
 <body class="fixed-left">
 <div id="wrapper">
-    <jsp:include page="header.jsp"></jsp:include>
+    <jsp:include page="header.jsp" flush="true"></jsp:include>
     <div class="content-page">
         <div class="content">
             <div class="container">

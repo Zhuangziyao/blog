@@ -69,41 +69,48 @@
                             </div>
                             <form class="user-form form-inline panel-body" style="padding-left: 20px;padding-right: 20px;">
                                 <input style="display: none" name="uId" id="uId">
-                                <div>
-                                    <label class="col-md-1 control-label">用户帐号 </label>
-                                    <input class="col-md-2" style="margin-bottom: 10px;" type="text" name="userName" id="userName">
+                                <div >
+                                    <label style="" class="col-md-1 control-label">用户帐号 </label>
+                                    <input class="col-md-2" style="" type="text" name="userName" id="userName">
+
                                 </div>
-                                <div style="margin-bottom: 10px;">
-                                    <label class="col-md-1 control-label">用户名 </label>
-                                    <input class="col-md-2" style="margin-bottom: 10px;" type="text" name="screenName" id="screenName">
+                                <div >
+                                    <label style="" class="col-md-1 control-label">用户名 </label>
+                                    <input class="col-md-2" style="" type="text" name="screenName" id="screenName">
+
                                 </div>
-                                <div style="margin-bottom: 10px;">
-                                    <label class="col-md-1 control-label">密码 </label>
-                                    <input class="col-md-2" style="margin-bottom: 10px;" type="text" name="password" id="password">
+                                <div >
+                                    <label style="" class="col-md-1 control-label">密码 </label>
+                                    <input class="col-md-2" style="" type="text" name="password" id="password">
+
                                 </div>
-                                <div style="margin-bottom: 10px;">
-                                    <label class="col-md-1 control-label">组别 </label>
-                                    <select class="col-md-2" style="margin-bottom: 10px;" type="text" name="groupName" id="groupName">
+                                <div style="">
+                                    <label style="" class="col-md-1 control-label">组别 </label>
+                                    <select class="col-md-2" style="" type="text" name="groupName" id="groupName">
                                         <option value="super">super</option>
                                         <option value="admin">admin</option>
                                         <option value="visitor" selected="selected">visitor</option>
                                     </select>
+
                                 </div>
-                                <div >
-                                    <label class="col-md-1 control-label">邮箱 </label>
-                                    <input class="col-md-2" style="margin-bottom: 10px;" type="text" name="email" id="email" placeholder="可空">
+                                <div style="">
+                                    <label style="width: 100px;" class="col-md-1 control-label">邮箱 </label>
+                                    <input class="col-md-2" style="" type="text" name="email" id="email" placeholder="可空">
+
                                 </div>
-                                <div style="margin-bottom: 10px;">
-                                    <label class="col-md-1 control-label">HomeUrl </label>
-                                    <input class="col-md-2" style="margin-bottom: 10px;" type="text" name="homeUrl" id="homeUrl" placeholder="可空">
+                                <div style="">
+                                    <label style="" class="col-md-1 control-label">HomeUrl </label>
+                                    <input class="col-md-2" style="" type="text" name="homeUrl" id="homeUrl" placeholder="可空">
                                 </div>
-                                <div style="margin-bottom: 10px;">
+                                <div style="">
                                     <label class="col-md-1 control-label">Activated </label>
-                                    <input class="col-md-2" style="margin-bottom: 10px;" type="text" name="activated" id="activated" placeholder="可空">
+                                    <input class="col-md-2" style="" type="text" name="activated" id="activated" placeholder="可空">
+
                                 </div>
-                                <div style="margin-bottom: 10px;">
+                                <div style="">
                                     <label class="col-md-1 control-label">Logged </label>
-                                    <input class="col-md-2" style="margin-bottom: 10px;" type="text" name="logged" id="logged" placeholder="可空">
+                                    <input class="col-md-2" style="" type="text" name="logged" id="logged" placeholder="可空">
+
                                 </div>
                                 <button  class="btn btn-pink btn-sm waves-effect waves-light m-b-5" id="user-btn">
                                     <i class="fa fa-paw"></i> <span>添加用户</span></button>
