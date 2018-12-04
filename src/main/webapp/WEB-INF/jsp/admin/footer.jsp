@@ -11,9 +11,9 @@
    <footer class="footer text-right">
        2018 - <a href="https://github.com/Zhuangziyao" target="_blank">BPM Blog</a><div class=""></div>
    </footer>
-   <script src="http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="http://cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.js"></script>
+   <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.js"></script>
 <script src="<%=path %>/static/admin/js/jquery.app.js"></script>
 <script src="<%=path %>/static/admin/js/base.js"></script>
 </body>

@@ -8,10 +8,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>BPG Blog - 登录</title>
 	<link href="<%=path %>/static/admin/images/favicon.ico" rel="shortcut icon"/>
-	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="<%=path %>/static/admin/css/style.min.css" rel="stylesheet" type="text/css"/>
-    <link href="http://cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.css" rel="stylesheet"/>
 <style type="text/css">
 	body{
 		position:absolute;
@@ -87,10 +87,10 @@
         </div>
     </div>
 </div>
-<script src="http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
 <script type="text/javascript" src="<%=path%>/static/user/js/jquery.cookie.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="http://cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.js"></script>
 <script src="<%=path %>/static/admin/js/base.js"></script>
 <script>
     //判断是否是记住我了

@@ -96,8 +96,8 @@
     </div>
 </div>
 <jsp:include page="footer.jsp"/>
-<script src="http://cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js"></script>
-<script src="http://cdn.bootcss.com/jquery-validate/1.15.1/localization/messages_zh.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.15.1/localization/messages_zh.min.js"></script>
 <script type="text/javascript">
     //修改信息
     function saveSetting(){
