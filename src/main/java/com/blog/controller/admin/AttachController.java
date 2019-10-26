@@ -32,54 +32,54 @@ public class AttachController {
     private AttachService attachService;
 
     @RequestMapping("")
-    public String attach(HttpServletRequest request){
-        List<Attach> attaches=attachService.findAll();
-        request.setAttribute("attaches",attaches);
+    public String attach(HttpServletRequest request) {
+        List<Attach> attaches = attachService.findAll();
+        request.setAttribute("attaches", attaches);
         return "admin/attach";
     }
 
     @RequestMapping("/upload")
     @ResponseBody
-    public String upload(HttpServletRequest request,@RequestParam("file") MultipartFile[] multipartFiles) throws IOException {
-        User user=(User)request.getSession().getAttribute("user");
-        Date date=new Date();
-        String path=request.getSession().getServletContext().getRealPath("/upload");
-        File file=new File(path);
+    public String upload(HttpServletRequest request, @RequestParam("file") MultipartFile[] multipartFiles) throws IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        Date date = new Date();
+        String path = request.getSession().getServletContext().getRealPath("/upload");
+        File file = new File(path);
         //若路径不存在则创建
-        if(!file.exists()){
+        if (!file.exists()) {
             file.mkdir();
         }
 
-        try{
-            for (MultipartFile multipartFile:multipartFiles){
-                String fname=multipartFile.getOriginalFilename();//全名
-                String ftype=fname.substring(fname.lastIndexOf(".")+1);//文件后缀名
-                path=path+"/"+fname;
-                String savePath="/upload/"+fname;
-                Attach attach=new Attach();
+        try {
+            for (MultipartFile multipartFile : multipartFiles) {
+                String fname = multipartFile.getOriginalFilename();//全名
+                String ftype = fname.substring(fname.lastIndexOf(".") + 1);//文件后缀名
+                path = path + "/" + fname;
+                String savePath = "/upload/" + fname;
+                Attach attach = new Attach();
                 attach.setFname(fname);
                 attach.setAuthorId(user.getuId());
-                attach.setFtype(checkType(ftype)==true?"image":ftype);
-                attach.setCreated((int)(date.getTime()/1000));
-                try{
-                    FileUtils.copyInputStreamToFile(multipartFile.getInputStream(),new File(path));
+                attach.setFtype(checkType(ftype) == true ? "image" : ftype);
+                attach.setCreated((int) (date.getTime() / 1000));
+                try {
+                    FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), new File(path));
                     attach.setFkey(savePath);
                     attachService.insert(attach);
-                }catch(IOException E){
+                } catch (IOException E) {
                     System.out.println(E.getMessage());
                     E.printStackTrace();
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return "success";
     }
 
-    public boolean checkType(String type){
-        if(type.equals("png")||type.equals("jpg")||type.equals("jpeg")
-                ||type.equals("bmp")||type.equals("ico")||type.equals("gif"))
+    public boolean checkType(String type) {
+        if (type.equals("png") || type.equals("jpg") || type.equals("jpeg")
+                || type.equals("bmp") || type.equals("ico") || type.equals("gif"))
             return true;
         else
             return false;
@@ -87,17 +87,17 @@ public class AttachController {
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String deleteAttach(@RequestParam int id,HttpServletRequest request){
-        String savePath=attachService.findPathById(id);
-        String path=request.getSession().getServletContext().getRealPath("upload");
-        String deletePath=path+"/"+savePath.split("/upload/")[1];
+    public String deleteAttach(@RequestParam int id, HttpServletRequest request) {
+        String savePath = attachService.findPathById(id);
+        String path = request.getSession().getServletContext().getRealPath("upload");
+        String deletePath = path + "/" + savePath.split("/upload/")[1];
         System.out.println(deletePath);
-        File file=new File(deletePath);
-        if(file.exists()){
+        File file = new File(deletePath);
+        if (file.exists()) {
             file.delete();
             attachService.deleteById(id);
             return "success";
-        }else{
+        } else {
             attachService.deleteById(id);
             return "failed";
         }

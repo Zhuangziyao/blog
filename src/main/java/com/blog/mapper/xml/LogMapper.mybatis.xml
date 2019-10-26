@@ -19,7 +19,7 @@
             <if test="ip != '' and ip != null">ip,</if>
             <if test="created != '' and created != null">created,</if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="action != '' and action != null">#{action},</if>
             <if test="data != '' and data != null">#{data},</if>
             <if test="authorId != '' and authorId != null">#{authorId},</if>

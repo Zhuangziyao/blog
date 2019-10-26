@@ -21,17 +21,17 @@ public class LinkController {
     private MetaService metaService;
 
     @RequestMapping("")
-    public String link(HttpServletRequest request){
-        List<Meta> metaList=metaService.findMetaByType("link");
-        request.setAttribute("links",metaList);
+    public String link(HttpServletRequest request) {
+        List<Meta> metaList = metaService.findMetaByType("link");
+        request.setAttribute("links", metaList);
         return "admin/links";
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String delete(@RequestParam int mId){
+    public String delete(@RequestParam int mId) {
         int result = metaService.deleteById(mId);
-        if(result == 1)
+        if (result == 1)
             return "success";
         else
             return "failed";
@@ -40,28 +40,28 @@ public class LinkController {
     @RequestMapping("/save")
     @ResponseBody
     public String save(@RequestParam String name, @RequestParam String slug,
-                         @RequestParam String description, @RequestParam Integer mId,
-                         @RequestParam(value = "sort", defaultValue = "0") int sort){
+                       @RequestParam String description, @RequestParam Integer mId,
+                       @RequestParam(value = "sort", defaultValue = "0") int sort) {
         int result;
-        Meta meta =new Meta();
-        try{
-            if(mId != null)
+        Meta meta = new Meta();
+        try {
+            if (mId != null)
                 meta.setmId(mId);
             meta.setName(name);
             meta.setSlug(slug);
             meta.setSort(sort);
             meta.setDescription(description);
-            if(meta.getType()== null)
+            if (meta.getType() == null)
                 meta.setType("link");
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if(meta.getmId() != null)
+        if (meta.getmId() != null)
             result = metaService.updateById(meta);
         else
             result = metaService.insert(meta);
-        if(result == 1)
+        if (result == 1)
             return "success";
         else
             return "failed";

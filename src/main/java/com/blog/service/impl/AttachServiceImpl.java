@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class AttachServiceImpl implements AttachService {
 
     @Autowired
     private AttachMapper attachMapper;
+
     @Override
     public int insert(Attach attach) {
         return attachMapper.insert(attach);

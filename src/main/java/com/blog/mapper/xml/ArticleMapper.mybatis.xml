@@ -16,83 +16,83 @@
         <result property="commentsNum" column="comments_num" jdbcType="INTEGER"/>
         <result property="allowComment" column="allow_comment" jdbcType="BIT"/>
         <result property="allowPing" column="allow_ping" jdbcType="BIT"/>
-        <result property="allowFeed" column="allow_feed" jdbcType="BIT" />
+        <result property="allowFeed" column="allow_feed" jdbcType="BIT"/>
         <result property="content" column="content" jdbcType="LONGVARCHAR"/>
     </resultMap>
 
     <resultMap id="archiveMap" type="com.blog.model.Archive">
         <id property="date" column="date"/>
-        <result property="count" column="count" />
+        <result property="count" column="count"/>
     </resultMap>
 
     <select id="getArticlesCount" resultType="Integer">
-    	select count(*) from t_contents
+        select count(*) from t_contents
     </select>
 
     <select id="findArticles" resultMap="articleMap">
         select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
-    	comments_num, allow_comment, allow_ping, allow_feed
-    	from t_contents
-    	where status='publish'
-    	order by created desc
-    	limit #{start},#{pageSize}
+        comments_num, allow_comment, allow_ping, allow_feed
+        from t_contents
+        where status='publish'
+        order by created desc
+        limit #{start},#{pageSize}
     </select>
 
     <select id="findArticleById" resultMap="articleMap">
-    	select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
-    	comments_num, allow_comment, allow_ping, allow_feed, content
-    	from t_contents
-    	where cid=#{cid} limit 1
+        select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+        comments_num, allow_comment, allow_ping, allow_feed, content
+        from t_contents
+        where cid=#{cid} limit 1
     </select>
 
     <select id="findArticleByWord" resultMap="articleMap">
-    	select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
-    	comments_num, allow_comment, allow_ping, allow_feed
-    	from t_contents
-    	where title like concat('%',#{word},'%')
+        select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+        comments_num, allow_comment, allow_ping, allow_feed
+        from t_contents
+        where title like concat('%',#{word},'%')
     </select>
 
     <select id="findAllArchives" resultMap="archiveMap">
-    	select FROM_UNIXTIME(created, '%Y年%m月') as date, count(*) as count
-    	from t_contents
-    	where status = 'publish'
-    	group by date
-    	order by date desc
+        select FROM_UNIXTIME(created, '%Y年%m月') as date, count(*) as count
+        from t_contents
+        where status = 'publish'
+        group by date
+        order by date desc
     </select>
 
     <select id="findArticleByDate" resultMap="articleMap">
-	    select cid,title,created
-	    from t_contents
-	    where FROM_UNIXTIME(created, '%Y年%m月')=#{date}
+        select cid,title,created
+        from t_contents
+        where FROM_UNIXTIME(created, '%Y年%m月')=#{date}
     </select>
 
     <select id="findArticleBySlug" resultMap="articleMap">
-   		select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
-    	comments_num, allow_comment, allow_ping, allow_feed,content
-    	from t_contents
-    	where slug=#{slug}
+        select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+        comments_num, allow_comment, allow_ping, allow_feed,content
+        from t_contents
+        where slug=#{slug}
     </select>
 
     <select id="findArticleByCategory" resultMap="articleMap">
-    	select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
-    	comments_num, allow_comment, allow_ping, allow_feed
-    	from t_contents
-    	where categories=#{category} and status='publish'
+        select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+        comments_num, allow_comment, allow_ping, allow_feed
+        from t_contents
+        where categories=#{category} and status='publish'
     </select>
 
     <select id="findArticleByTag" resultMap="articleMap">
-    	select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
-    	comments_num, allow_comment, allow_ping, allow_feed
-    	from t_contents
-    	where tags like concat('%',#{tag},'%') and status='publish'
+        select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
+        comments_num, allow_comment, allow_ping, allow_feed
+        from t_contents
+        where tags like concat('%',#{tag},'%') and status='publish'
     </select>
 
     <select id="findArticleOrderByCreate" resultMap="articleMap">
         select cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
-    	comments_num, allow_comment, allow_ping, allow_feed
-    	from t_contents
-    	order by created desc
-    	limit 0,5
+        comments_num, allow_comment, allow_ping, allow_feed
+        from t_contents
+        order by created desc
+        limit 0,5
     </select>
 
     <delete id="delete">
@@ -106,7 +106,7 @@
     <insert id="insert" parameterType="com.blog.model.Article">
         insert into t_contents
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="title != null and title != ''"> title,</if>
+            <if test="title != null and title != ''">title,</if>
             <if test="slug != null and slug != ''">slug,</if>
             <if test="content != null and content != ''">content,</if>
             <if test="authorId != null and authorId != ''">author_id,</if>
@@ -120,8 +120,8 @@
             <if test="created != null and created != ''">created,</if>
             <if test="modified != null and modified != ''">modified,</if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="title != null and title != ''"> #{title},</if>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
             <if test="slug != null and slug != ''">#{slug},</if>
             <if test="content != null and content != ''">#{content},</if>
             <if test="authorId != null and authorId != ''">#{authorId},</if>
@@ -140,7 +140,7 @@
     <update id="updateById" parameterType="com.blog.model.Article">
         update t_contents
         <set>
-            <if test="title != null and title != ''"> title=#{title},</if>
+            <if test="title != null and title != ''">title=#{title},</if>
             <if test="slug != null and slug != ''">slug=#{slug},</if>
             <if test="content != null and content != ''">content=#{content},</if>
             <if test="authorId != null and authorId != ''">author_id=#{authorId},</if>

@@ -13,7 +13,7 @@
         <!-- 设置超时时间，等待一个数据库的响应时间 -->
         <setting name="defaultStatementTimeout" value="25000"/>
         <!-- 打印sql语句 -->
-        <setting name="logImpl" value="STDOUT_LOGGING" />
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 
 </configuration>

@@ -1,11 +1,11 @@
 <%@ page import="com.blog.model.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-    <%String path=request.getContextPath(); %>
+         pageEncoding="UTF-8" %>
+<%String path = request.getContextPath(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="utf-8"/>
+    <meta charset="utf-8"/>
     <title>博客后台 - BPM Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="Coderthemes" name="author"/>
@@ -44,14 +44,14 @@
                         <a href="" class="dropdown-toggle profile" data-toggle="dropdown"
                            aria-expanded="true" style="width:60px;margin-right: 15px">
                             <img src="<%=path%>/static/admin/images/user/user-avatar.png" alt="user-img"
-                                                     class="img-circle" style="margin-top:5px;width: 60px;height: 60px"/>
+                                 class="img-circle" style="margin-top:5px;width: 60px;height: 60px"/>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-	                            <a href="../" target="_blank">
-	                            	<i class="fa fa-eye" aria-hidden="true"></i>查看网站
-	                            </a>
-	                        </li>
+                                <a href="../" target="_blank">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>查看网站
+                                </a>
+                            </li>
                             <li><a href="<%=path %>/admin/profile"><i class="fa fa-sun-o"></i> 个人设置</a></li>
                             <li><a href="<%=path %>/admin/logout"><i class="fa fa-sign-out"></i> 注销</a></li>
                         </ul>
@@ -70,42 +70,42 @@
                         <i class="fa fa-dashboard waves-effect" aria-hidden="true"></i>
                         <span> 仪表盘 </span></a>
                 </li>
-                <li >
+                <li>
                     <a href="<%=path %>/admin/article/publish">
                         <i class="fa fa-pencil-square-o waves-effect" aria-hidden="true"></i>
-                            <span> 发布文章 </span></a>
+                        <span> 发布文章 </span></a>
                 </li>
-                <li >
+                <li>
                     <a href="<%=path %>/admin/article">
                         <i class="fa fa-list waves-effect" aria-hidden="true"></i>
                         <span> 文章管理 </span></a>
                 </li>
-                <% User user=(User)session.getAttribute("user");
-                if(user.getGroupName().equals("super")){%>
-                <li >
-                    <a href="<%=path %>/admin/user" ><i class="fa fa-file-text waves-effect" aria-hidden="true"></i>
-                            <span> 用户管理 </span></a>
+                <% User user = (User) session.getAttribute("user");
+                    if (user.getGroupName().equals("super")) {%>
+                <li>
+                    <a href="<%=path %>/admin/user"><i class="fa fa-file-text waves-effect" aria-hidden="true"></i>
+                        <span> 用户管理 </span></a>
                 </li>
                 <% } %>
-                <li >
+                <li>
                     <a href="<%=path %>/admin/comments"><i class="fa fa-comments waves-effect" aria-hidden="true"></i>
-                            <span> 评论管理 </span></a>
+                        <span> 评论管理 </span></a>
                 </li>
-                <li >
+                <li>
                     <a href="<%=path %>/admin/category"><i class="fa fa-tags waves-effect" aria-hidden="true"></i>
-                            <span> 分类/标签 </span></a>
+                        <span> 分类/标签 </span></a>
                 </li>
-                <li >
+                <li>
                     <a href="<%=path %>/admin/attach"><i class="fa fa-cloud-upload waves-effect" aria-hidden="true"></i>
-                    <span> 文件管理 </span></a>
+                        <span> 文件管理 </span></a>
                 </li>
-                <li >
-                    <a href="<%=path %>/admin/links" ><i class="fa fa-link waves-effect" aria-hidden="true"></i>
-                    <span> 友链管理 </span></a>
+                <li>
+                    <a href="<%=path %>/admin/links"><i class="fa fa-link waves-effect" aria-hidden="true"></i>
+                        <span> 友链管理 </span></a>
                 </li>
-                <li >
+                <li>
                     <a href="<%=path %>/admin/setting"><i class="fa fa-gear waves-effect" aria-hidden="true"></i>
-                    <span> 系统设置 </span></a>
+                        <span> 系统设置 </span></a>
                 </li>
             </ul>
             <div class="clearfix"></div>
@@ -113,31 +113,32 @@
         <div class="clearfix"></div>
     </div>
 </div>
-<script type="text/javascript"src="<%=path%>/static/user/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="<%=path%>/static/user/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	//动态修改active状态
-    $(document).ready(function(){
-        var url=window.location.href;
+    //动态修改active状态
+    $(document).ready(function () {
+        var url = window.location.href;
         console.log(url);
-        if(url.indexOf("index")!=-1){
+        if (url.indexOf("index") != -1) {
             $("#side-menu ul li:eq(0) a").addClass("active");
-        }else if(url.indexOf("article/publish")!=-1){
+        } else if (url.indexOf("article/publish") != -1) {
             $("#side-menu ul li:eq(1) a").addClass("active");
-        }else if(url.indexOf("/article")!=-1){
+        } else if (url.indexOf("/article") != -1) {
             $("#side-menu ul li:eq(2) a").addClass("active");
-        }else if(url.indexOf("user")!=-1){
+        } else if (url.indexOf("user") != -1) {
             $("#side-menu ul li:eq(3) a").addClass("active");
-        }else if(url.indexOf("comments")!=-1){
+        } else if (url.indexOf("comments") != -1) {
             $("#side-menu ul li:eq(4) a").addClass("active");
-        }else if(url.indexOf("category")!=-1){
+        } else if (url.indexOf("category") != -1) {
             $("#side-menu ul li:eq(5) a").addClass("active");
-        }else if(url.indexOf("attach")!=-1){
+        } else if (url.indexOf("attach") != -1) {
             $("#side-menu ul li:eq(6) a").addClass("active");
-        }else if(url.indexOf("links")!=-1){
+        } else if (url.indexOf("links") != -1) {
             $("#side-menu ul li:eq(7) a").addClass("active");
-        }else if(url.indexOf("setting")!=-1){
+        } else if (url.indexOf("setting") != -1) {
             $("#side-menu ul li:eq(8) a").addClass("active");
-        }})
+        }
+    })
 </script>
 </body>
 </html>

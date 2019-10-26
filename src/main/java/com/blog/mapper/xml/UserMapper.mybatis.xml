@@ -15,9 +15,9 @@
     </resultMap>
     <!-- 登录判断 -->
     <select id="findUserByNameAndPwd" resultMap="userMap">
-		select * from t_users
-		where user_name=#{userName} and password=#{password}
-	</select>
+        select * from t_users
+        where user_name=#{userName} and password=#{password}
+    </select>
 
     <insert id="addUser" parameterType="com.blog.model.User">
         insert into t_users
@@ -50,7 +50,7 @@
                 group_name,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userName != null and userName != ''">
                 #{userName},
             </if>
@@ -82,8 +82,8 @@
     </insert>
 
     <delete id="deleteUserByName">
-		delete from t_users where user_name=#{userName}
-	</delete>
+        delete from t_users where user_name=#{userName}
+    </delete>
 
     <update id="updateUserByName" parameterType="com.blog.model.User">
         update t_users
@@ -117,9 +117,9 @@
     </update>
     <!-- 判断用户是否存在 -->
     <select id="findUserByName" resultMap="userMap">
-		select * from t_users
-		where user_name=#{userName}
-	</select>
+        select * from t_users
+        where user_name=#{userName}
+    </select>
 
     <select id="findAll" resultMap="userMap">
         select * from t_users

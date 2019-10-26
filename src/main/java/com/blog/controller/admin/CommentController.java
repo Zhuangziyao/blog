@@ -29,21 +29,21 @@ public class CommentController {
     private IndexService indexService;
 
     @RequestMapping("")
-    public String comment(HttpServletRequest request){
-        List<Comment> comments=commentService.findAll();
-        request.setAttribute("comments",comments);
+    public String comment(HttpServletRequest request) {
+        List<Comment> comments = commentService.findAll();
+        request.setAttribute("comments", comments);
         return "admin/comment_list";
     }
 
     @RequestMapping("/approve")
     @ResponseBody
-    public String updateStatus(@RequestParam int coid){
+    public String updateStatus(@RequestParam int coid) {
         return "success";
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String deleteComment(@RequestParam int coid){
+    public String deleteComment(@RequestParam int coid) {
         commentService.delete(coid);
         //文章的评论数应该-1
         //indexService.updateComment();

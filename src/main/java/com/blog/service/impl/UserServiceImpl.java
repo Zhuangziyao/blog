@@ -13,36 +13,36 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private UserMapper userDAO;
-	
-	@Override
-	public List<User> findUserByNameAndPwd(String userName, String password) {
-		return userDAO.findUserByNameAndPwd(userName, password);
-	}
+    @Autowired
+    private UserMapper userDAO;
 
-	@Override
-	public int addUser(User user) {
-		return userDAO.addUser(user);
-	}
+    @Override
+    public List<User> findUserByNameAndPwd(String userName, String password) {
+        return userDAO.findUserByNameAndPwd(userName, password);
+    }
 
-	@Override
-	public int deleteUserByName(String userName) {
-		return userDAO.deleteUserByName(userName);
-	}
+    @Override
+    public int addUser(User user) {
+        return userDAO.addUser(user);
+    }
 
-	@Override
-	public int updateUserByName(User user) {
-		return userDAO.updateUserByName(user);
-	}
+    @Override
+    public int deleteUserByName(String userName) {
+        return userDAO.deleteUserByName(userName);
+    }
 
-	@Override
-	public List<User> findUserByName(String userName) {
-		return userDAO.findUserByName(userName);
-	}
+    @Override
+    public int updateUserByName(User user) {
+        return userDAO.updateUserByName(user);
+    }
 
-	@Override
-	public List<User> findAll() {
-		return userDAO.findAll();
-	}
+    @Override
+    public List<User> findUserByName(String userName) {
+        return userDAO.findUserByName(userName);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userDAO.findAll();
+    }
 }

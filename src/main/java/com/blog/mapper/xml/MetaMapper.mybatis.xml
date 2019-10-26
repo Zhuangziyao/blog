@@ -3,11 +3,11 @@
 <mapper namespace="com.blog.mapper.MetaMapper">
     <resultMap id="metaMap" type="com.blog.model.Meta">
         <id column="mid" property="mId"/>
-        <result column="name" property="name" />
-        <result column="slug" property="slug" />
-        <result column="type" property="type" />
-        <result column="description" property="description" />
-        <result column="sort" property="sort" />
+        <result column="name" property="name"/>
+        <result column="slug" property="slug"/>
+        <result column="type" property="type"/>
+        <result column="description" property="description"/>
+        <result column="sort" property="sort"/>
     </resultMap>
 
     <resultMap id="metaDtoMap" type="com.blog.model.MetaDto" extends="metaMap">
@@ -55,7 +55,7 @@
             <if test="sort != '' and sort != null">sort,</if>
             <if test="type != '' and type != null">type,</if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != '' and name != null">#{name},</if>
             <if test="slug != '' and slug != null">#{slug},</if>
             <if test="description != '' and description != null">#{description},</if>

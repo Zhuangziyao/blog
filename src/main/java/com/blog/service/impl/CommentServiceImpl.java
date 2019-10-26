@@ -45,7 +45,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> findByCid(int cid){
+    public List<Comment> findByCid(int cid) {
         return commentMapper.findByCid(cid);
     }
 }

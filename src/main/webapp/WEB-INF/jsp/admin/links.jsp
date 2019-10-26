@@ -1,14 +1,14 @@
 <%@ page import="com.blog.model.Meta" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<% String path=request.getContextPath();%>
+         pageEncoding="UTF-8" %>
+<% String path = request.getContextPath();%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="shortcut icon" href="<%=path %>/static/admin/images/favicon.ico" type="image/x-icon"/>
-<title>友链管理</title>
+    <title>友链管理</title>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -31,23 +31,28 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <% List<Meta> metaList=(List<Meta>)request.getAttribute("links");
-                            for(int i=0;i<metaList.size();i++){%>
-                            <tr>
-                                <td style="display: none;"><%=metaList.get(i).getmId()%></td>
-                                <td><%=metaList.get(i).getName()%></td>
-                                <td><a href="<%=metaList.get(i).getSlug()%>" target="_blank"><%=metaList.get(i).getSlug()%></a></td>
-                                <td><%=metaList.get(i).getDescription()%></td>
-                                <td><%=metaList.get(i).getSort()%></td>
-                                <td>
-                                    <a href="javascript:void(0)" onclick="editLink(this);"
-                                       class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i
-                                            class="fa fa-edit"></i> <span>编辑</span></a>
-                                    <a href="javascript:void(0)" onclick="delLink(this);"
-                                       class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
-                                            class="fa fa-trash-o"></i> <span>删除</span></a>
-                                </td>
-                            </tr>
+                        <% List<Meta> metaList = (List<Meta>) request.getAttribute("links");
+                            for (int i = 0; i < metaList.size(); i++) {%>
+                        <tr>
+                            <td style="display: none;"><%=metaList.get(i).getmId()%>
+                            </td>
+                            <td><%=metaList.get(i).getName()%>
+                            </td>
+                            <td><a href="<%=metaList.get(i).getSlug()%>" target="_blank"><%=metaList.get(i).getSlug()%>
+                            </a></td>
+                            <td><%=metaList.get(i).getDescription()%>
+                            </td>
+                            <td><%=metaList.get(i).getSort()%>
+                            </td>
+                            <td>
+                                <a href="javascript:void(0)" onclick="editLink(this);"
+                                   class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i
+                                        class="fa fa-edit"></i> <span>编辑</span></a>
+                                <a href="javascript:void(0)" onclick="delLink(this);"
+                                   class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
+                                        class="fa fa-trash-o"></i> <span>删除</span></a>
+                            </td>
+                        </tr>
                         <% } %>
                         </tbody>
                     </table>
@@ -64,13 +69,15 @@
 
                                     <div class="form-group">
                                         <label class="sr-only">链接标题</label>
-                                        <input type="text" id="name" name="name" class="form-control" placeholder="请输入链接标题"
+                                        <input type="text" id="name" name="name" class="form-control"
+                                               placeholder="请输入链接标题"
                                                required="required" aria-required="true"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="sr-only">链接URL</label>
-                                        <input type="url" id="slug" name="slug" class="form-control" placeholder="请输入链接地址" required="required"
+                                        <input type="url" id="slug" name="slug" class="form-control"
+                                               placeholder="请输入链接地址" required="required"
                                                aria-required="true"/>
                                     </div>
 
@@ -85,7 +92,9 @@
                                         <input type="number" id="sort" name="sort" class="form-control" value="0"/>
                                     </div>
 
-                                    <button type="submit" class="btn btn-success waves-effect waves-light m-l-10" onclick="save()">保存链接</button>
+                                    <button type="submit" class="btn btn-success waves-effect waves-light m-l-10"
+                                            onclick="save()">保存链接
+                                    </button>
                                 </form>
                             </div> <!-- panel-body -->
                         </div> <!-- panel -->
@@ -99,8 +108,8 @@
 <script type="text/javascript" src="<%=path%>/static/user/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
     //编辑友链
-    function editLink(object){
-        var obj=$(object);
+    function editLink(object) {
+        var obj = $(object);
         var mid = obj.parents('tr').find('td:eq(0)').text();
         var title = obj.parents('tr').find('td:eq(1)').text();
         var url = obj.parents('tr').find('td:eq(2)').text();
@@ -115,20 +124,20 @@
     }
 
     //删除友链
-    function delLink(obj){
+    function delLink(obj) {
         var mid = $(obj).parents('tr').find('td:eq(0)').text();
         $.ajax({
-            type:"POST",
-            url:"./links/delete",
-            data:{mId:mid},
-            success:function(data){
-                if(data == "success")
+            type: "POST",
+            url: "./links/delete",
+            data: {mId: mid},
+            success: function (data) {
+                if (data == "success")
                     alert("友链删除成功");
                 else
                     alert("友链删除失败");
                 window.location.reload();
             },
-            error:function(XMLHttpRequest, textStatus, errorThrown) {
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
                 // 状态码
                 console.log(XMLHttpRequest.status);
                 // 状态
@@ -140,31 +149,31 @@
     }
 
     //保存友链
-    function save(){
-        if($('#linkForm #name').val()==''||$('#linkForm #name').val()==null){
+    function save() {
+        if ($('#linkForm #name').val() == '' || $('#linkForm #name').val() == null) {
             alert("链接名称不能为空");
             return;
         }
-        if($('#linkForm #slug').val()==''||$('#linkForm #slug').val()==null){
+        if ($('#linkForm #slug').val() == '' || $('#linkForm #slug').val() == null) {
             alert('链接url不能为空');
             return;
         }
-        var params=$("#linkForm").serialize();
+        var params = $("#linkForm").serialize();
         $.ajax({
-            type:"POST",
-            url : './links/save',
+            type: "POST",
+            url: './links/save',
             data: params,
             success: function (result) {
                 $('#linkForm input').val('');
                 $('#linkForm #sort').val('0');
-                if(result=="success"){
+                if (result == "success") {
                     alert('友链保存成功');
                 } else {
                     alert('友链保存失败');
                 }
                 window.location.reload();
             },
-            error:function(XMLHttpRequest, textStatus, errorThrown) {
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
                 // 状态码
                 console.log(XMLHttpRequest.status);
                 // 状态

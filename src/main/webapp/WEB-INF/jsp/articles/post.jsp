@@ -1,56 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ page import="com.blog.model.Article" %>
 <%@page import="java.util.*" %>
 <%@ page import="java.text.*,com.blog.common.util.*" %>
-<% String path=request.getContextPath(); %>
-<% Article article=(Article)request.getAttribute("article"); %>
+<% String path = request.getContextPath(); %>
+<% Article article = (Article) request.getAttribute("article"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%=article.getTitle() %> - BPM Blog</title>
-    <link rel="shortcut icon" href="<%=path%>/static/user/img/favicon.ico" />
-<link rel="stylesheet" href="<%=path %>/static/user/css/style.min.css"/>
-<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/xcode.min.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><%=article.getTitle() %> - BPM Blog</title>
+    <link rel="shortcut icon" href="<%=path%>/static/user/img/favicon.ico"/>
+    <link rel="stylesheet" href="<%=path %>/static/user/css/style.min.css"/>
+    <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/xcode.min.css" rel="stylesheet">
 </head>
 <body class="bg-grey">
-<jsp:include page="header.jsp" />
+<jsp:include page="header.jsp"/>
 <article class="main-content post-page" itemscope="" itemtype="http://schema.org/Article">
     <div class="post-header">
         <h1 class="post-title" itemprop="name headline">
-            <a href="" data-no-instant=""><%=article.getTitle() %></a>
+            <a href="" data-no-instant=""><%=article.getTitle() %>
+            </a>
         </h1>
         <div class="post-data">
-            <time itemprop="datePublished" >发布于 <%=TimeTransform.TimeStamp2Date(article.getCreated()) %> </time>
-            / <a href="<%=path%>/category/<%=article.getCategories()%>"><%=article.getCategories() %></a> / <a href="#comments"><%=article.getCommentsNum() %>条评论</a> /
-            <block/><%=article.getHits() %>浏览
+            <time itemprop="datePublished">发布于 <%=TimeTransform.TimeStamp2Date(article.getCreated()) %>
+            </time>
+            / <a href="<%=path%>/category/<%=article.getCategories()%>"><%=article.getCategories() %>
+        </a> / <a href="#comments"><%=article.getCommentsNum() %>条评论</a> /
+            <block/>
+            <%=article.getHits() %>浏览
         </div>
     </div>
     <div id="post-content" class="post-content" itemprop="articleBody">
         <p class="post-tags">
-        <% if(article.getTags()!=null&&!article.getTags().trim().equals("")){ %>
-        	<a href="<%=path %>/tag/<%=article.getTags()%>"><%=article.getTags() %></a>
-        <% } %>
+            <% if (article.getTags() != null && !article.getTags().trim().equals("")) { %>
+            <a href="<%=path %>/tag/<%=article.getTags()%>"><%=article.getTags() %>
+            </a>
+            <% } %>
         </p>
         <%=article.getContent() %>
         <p class="post-info">
             本站文章除注明转载/出处外，均为本站原创或翻译，转载前请务必署名,转载请标明出处.<br/>最后编辑时间为:
-            <block><%=TimeTransform.TimeStamp2Date(article.getModified()) %></block>
+            <block><%=TimeTransform.TimeStamp2Date(article.getModified()) %>
+            </block>
         </p>
     </div>
 </article>
-<% if(article.getType().equals("post")){ %>
-    <jsp:include page="comment.jsp"/>
+<% if (article.getType().equals("post")) { %>
+<jsp:include page="comment.jsp"/>
 <% } %>
-<jsp:include page="footer.jsp" />
-<% if(article.getType().equals("post")){ %>
-    <div id="directory-content" class="directory-content">
-        <div id="directory"></div>
-    </div>
+<jsp:include page="footer.jsp"/>
+<% if (article.getType().equals("post")) { %>
+<div id="directory-content" class="directory-content">
+    <div id="directory"></div>
+</div>
 <% } %>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script >hljs.initHighlightingOnLoad();</script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
     //右侧导航栏
     var postDirectoryBuild = function () {

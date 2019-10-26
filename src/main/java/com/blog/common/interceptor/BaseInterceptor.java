@@ -24,10 +24,10 @@ public class BaseInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
 
         LOGGE.info("UserAgent: {}", request.getHeader("user-agent"));
-        HttpSession session=request.getSession();
-        User user=(User)session.getAttribute("user");
-        if(user == null){
-            response.sendRedirect(request.getContextPath()+"/admin");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/admin");
             return false;
         }
         return true;

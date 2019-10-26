@@ -10,17 +10,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% String path=request.getContextPath(); %>
+<% String path = request.getContextPath(); %>
 <html>
 <head>
     <title>comment</title>
 </head>
 <body>
 <div>
-    <%Article article=(Article)request.getAttribute("article"); %>
+    <%Article article = (Article) request.getAttribute("article"); %>
     <div id="<%=article.getCid()%>" class="comment-container">
         <div id="comments" class="clearfix">
-            <% if(article.getAllowComment()==true){ %>
+            <% if (article.getAllowComment() == true) { %>
             <div>
                 <form id="comment-form" class="comment-form" role="form"
                       onsubmit="return false">
@@ -43,42 +43,44 @@
                     <button type="submit" class="submit" id="misubmit" onclick="subComment()">提交</button>
                 </form>
             </div>
-            <% }else{ %>
+            <% } else { %>
             <div>
                 <span class="response">评论已关闭.</span>
             </div>
             <% } %>
-            <% List<Comment> commentList=(List<Comment>)request.getAttribute("comments");
-              if(commentList.size()!=0){%>
+            <% List<Comment> commentList = (List<Comment>) request.getAttribute("comments");
+                if (commentList.size() != 0) {%>
             <div>
                 <ol class="comment-list">
-                    <% for(int i=0;i<commentList.size();i++){ %>
-                        <li id="li-comment-<%=commentList.get(i).getCoid()%>" class="comment-body comment-parent comment-odd">
-                            <div id="comment-<%=commentList.get(i).getCoid()%>">
-                                <div class="comment-view" onclick="">
-                                    <div class="comment-header">
-                                        <!--设置get请求的参数-->
-                                        <img class="avatar"
-                                             src="<%=path%>/static/user/img/comment/comment-<%=common.rand(1,19)%>.png"
-                                             title="<%=commentList.get(i).getAuthor()%>"
-                                             width="80" height="80"/>
-                                        <span class="comment-author">
+                    <% for (int i = 0; i < commentList.size(); i++) { %>
+                    <li id="li-comment-<%=commentList.get(i).getCoid()%>"
+                        class="comment-body comment-parent comment-odd">
+                        <div id="comment-<%=commentList.get(i).getCoid()%>">
+                            <div class="comment-view" onclick="">
+                                <div class="comment-header">
+                                    <!--设置get请求的参数-->
+                                    <img class="avatar"
+                                         src="<%=path%>/static/user/img/comment/comment-<%=common.rand(1,19)%>.png"
+                                         title="<%=commentList.get(i).getAuthor()%>"
+                                         width="80" height="80"/>
+                                    <span class="comment-author">
                                             <a href="##" rel="external nofollow"><%=commentList.get(i).getAuthor()%></a>
                                         </span>
-                                    </div>
-                                    <div class="comment-content">
-                                        <span class="comment-author-at"></span>
-                                        <p><%=commentList.get(i).getContent()%></p>
-                                    </div>
-                                    <div class="comment-meta">
-                                        <time class="comment-time">
-                                            <%=TimeTransform.TimeStamp2Date(commentList.get(i).getCreated())%>
-                                        </time>
-                                        <span class="comment-reply"></span>
-                                    </div>
+                                </div>
+                                <div class="comment-content">
+                                    <span class="comment-author-at"></span>
+                                    <p><%=commentList.get(i).getContent()%>
+                                    </p>
+                                </div>
+                                <div class="comment-meta">
+                                    <time class="comment-time">
+                                        <%=TimeTransform.TimeStamp2Date(commentList.get(i).getCreated())%>
+                                    </time>
+                                    <span class="comment-reply"></span>
                                 </div>
                             </div>
-                        </li>
+                        </div>
+                    </li>
                     <% } %>
                 </ol>
                 <%--<div class="lists-navigator clearfix">
@@ -104,18 +106,18 @@
 </div>
 <script type="text/javascript" src="<%=path%>/static/user/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-    function subComment(){
-        var author=$('#author').val();
-        var url=$('#url').val();
-        var mail=$('#mail').val();
-        var content=$('#textarea').val();
-        var cid=$('.comment-container').attr('id');
+    function subComment() {
+        var author = $('#author').val();
+        var url = $('#url').val();
+        var mail = $('#mail').val();
+        var content = $('#textarea').val();
+        var cid = $('.comment-container').attr('id');
         $.ajax({
-            type:'POST',
-            url:'../comment/add',
-            data:{author:author,url:url,mail:mail,content:content,cid:cid},
-            success:function(data){
-                if(data=='success'){
+            type: 'POST',
+            url: '../comment/add',
+            data: {author: author, url: url, mail: mail, content: content, cid: cid},
+            success: function (data) {
+                if (data == 'success') {
                     alert("提交成功");
                     window.location.reload();
                     $('#author').val('');

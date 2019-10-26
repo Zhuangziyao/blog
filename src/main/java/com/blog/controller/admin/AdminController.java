@@ -25,17 +25,17 @@ public class AdminController {
     private UserService userService;
 
     @RequestMapping("")
-    public String user(HttpServletRequest request){
-        List<User> useres=userService.findAll();
-        request.setAttribute("useres",useres);
+    public String user(HttpServletRequest request) {
+        List<User> useres = userService.findAll();
+        request.setAttribute("useres", useres);
         return "admin/user";
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String delete(@RequestParam String uname){
-        int result=userService.deleteUserByName(uname);
-        if(result==1)
+    public String delete(@RequestParam String uname) {
+        int result = userService.deleteUserByName(uname);
+        if (result == 1)
             return "success";
         else
             return "failed";
@@ -43,30 +43,30 @@ public class AdminController {
 
     @RequestMapping("/edit")
     @ResponseBody
-    public String edit(@RequestParam User user){
-        int result=userService.updateUserByName(user);
-        if(result==1){
+    public String edit(@RequestParam User user) {
+        int result = userService.updateUserByName(user);
+        if (result == 1) {
             return "success";
-        }else{
+        } else {
             return "failed";
         }
     }
 
     @RequestMapping("/add")
     @ResponseBody
-    public String add(@RequestParam User user){
-        int result=userService.addUser(user);
-        if(result==1){
+    public String add(@RequestParam User user) {
+        int result = userService.addUser(user);
+        if (result == 1) {
             return "success";
-        }else{
+        } else {
             return "failed";
         }
     }
 
     @RequestMapping("/get")
     @ResponseBody
-    public User getUser(@RequestParam String uname){
-        List<User> user=userService.findUserByName(uname);
+    public User getUser(@RequestParam String uname) {
+        List<User> user = userService.findUserByName(uname);
         return user.get(0);
     }
 }

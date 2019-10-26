@@ -16,69 +16,69 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/profile")
 public class UserController {
-	
-	@Autowired
-	private UserService userService;
 
-	@RequestMapping("")
-	public String profile(){
-		return "admin/profile";
-	}
+    @Autowired
+    private UserService userService;
 
-	@ResponseBody
-	@RequestMapping("/add")
-	public String addUser(@RequestBody User user) {
-		int result=userService.addUser(user);
-		if(result == 1) 
-			return "success";
-		else
-			return "failed";
-	}
-	
-	@RequestMapping("/delete")
-	@ResponseBody
-	public String deleteUser(String userName) {
-		int result=userService.deleteUserByName(userName);
-		if(result == 1) 
-			return "success";
-		else
-			return "failed";
-	}
-	
-	@RequestMapping("/update")
-	@ResponseBody
-	public String updateUser(@RequestParam String screenName,@RequestParam String email, HttpServletRequest request) {
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute("user");
-		user.setScreenName(screenName);
-		user.setEmail(email);
-		int result=userService.updateUserByName(user);
-		if(result == 1) 
-			return "success";
-		else
-			return "failed";
-	}
-
-	@RequestMapping("/updatePassword")
-	@ResponseBody
-	public String updatePassword(@RequestParam String oldPwd,@RequestParam String newPwd,HttpServletRequest request){
-        HttpSession session=request.getSession();
-        User user=(User)session.getAttribute("user");
-        if(user.getPassword().equals(oldPwd)){
-            user.setPassword(newPwd);
-            int result=userService.updateUserByName(user);
-            if(result == 1)
-            	return "success";
-            else
-            	return "failed";
-        }else
-        	return "failed";
+    @RequestMapping("")
+    public String profile() {
+        return "admin/profile";
     }
 
-	@ResponseBody
-	@RequestMapping("/findByName")
-	public List<User> findUserByName(String userName) {
-		List<User> list=userService.findUserByName(userName);
-		return list;
-	}
+    @ResponseBody
+    @RequestMapping("/add")
+    public String addUser(@RequestBody User user) {
+        int result = userService.addUser(user);
+        if (result == 1)
+            return "success";
+        else
+            return "failed";
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public String deleteUser(String userName) {
+        int result = userService.deleteUserByName(userName);
+        if (result == 1)
+            return "success";
+        else
+            return "failed";
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public String updateUser(@RequestParam String screenName, @RequestParam String email, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        user.setScreenName(screenName);
+        user.setEmail(email);
+        int result = userService.updateUserByName(user);
+        if (result == 1)
+            return "success";
+        else
+            return "failed";
+    }
+
+    @RequestMapping("/updatePassword")
+    @ResponseBody
+    public String updatePassword(@RequestParam String oldPwd, @RequestParam String newPwd, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user.getPassword().equals(oldPwd)) {
+            user.setPassword(newPwd);
+            int result = userService.updateUserByName(user);
+            if (result == 1)
+                return "success";
+            else
+                return "failed";
+        } else
+            return "failed";
+    }
+
+    @ResponseBody
+    @RequestMapping("/findByName")
+    public List<User> findUserByName(String userName) {
+        List<User> list = userService.findUserByName(userName);
+        return list;
+    }
 }

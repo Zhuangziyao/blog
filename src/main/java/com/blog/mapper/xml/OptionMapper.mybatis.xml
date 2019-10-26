@@ -14,7 +14,7 @@
             <if test="value != '' and value != null">t.value,</if>
             <if test="description != '' and description != null">t.description,</if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != '' and name != null">#{name},</if>
             <if test="value != '' and value != null">#{value},</if>
             <if test="description != '' and description != null">#{description},</if>
@@ -22,11 +22,11 @@
     </insert>
 
     <update id="updateByName" parameterType="com.blog.model.Option">
-            update t_options t
-            <set>
-                t.value=#{option.value}
-            </set>
-            where t.name=#{option.name}
+        update t_options t
+        <set>
+            t.value=#{option.value}
+        </set>
+        where t.name=#{option.name}
     </update>
 
     <select id="findAll" resultMap="optionMap">

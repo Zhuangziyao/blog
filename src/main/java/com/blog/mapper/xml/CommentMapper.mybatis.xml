@@ -35,7 +35,7 @@
             <if test="status != '' and status != null">status,</if>
             <if test="parent != '' and parent != null">parent,</if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="cid != '' and cid != null">#{cid},</if>
             <if test="created != '' and created != null">#{created},</if>
             <if test="author != '' and author != null">#{author},</if>

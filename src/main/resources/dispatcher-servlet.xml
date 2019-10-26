@@ -16,8 +16,8 @@
     <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           id="internalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
     <mvc:interceptors>
@@ -32,13 +32,13 @@
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
-                <ref bean="mappingJacksonHttpMessageConverter" />
+                <ref bean="mappingJacksonHttpMessageConverter"/>
             </list>
         </property>
     </bean>
     <bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-        <property name = "supportedMediaTypes">
+        <property name="supportedMediaTypes">
             <list>
                 <!--<bean class="org.springframework.http.MediaType">
                     <constructor-arg index="0" value="text"/>
@@ -68,11 +68,11 @@
     <!-- 配置文件上传，如果没有使用文件上传可以不用配置 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 默认编码 -->
-        <property name="defaultEncoding" value="utf-8" />
+        <property name="defaultEncoding" value="utf-8"/>
         <!-- 文件大小最大值 -->
-        <property name="maxUploadSize" value="10485760000" />
+        <property name="maxUploadSize" value="10485760000"/>
         <!-- 内存中的最大值 -->
-        <property name="maxInMemorySize" value="40960" />
+        <property name="maxInMemorySize" value="40960"/>
         <!-- 启用是为了推迟文件解析，以便捕获文件大小异常 -->
         <property name="resolveLazily" value="true"/>
     </bean>

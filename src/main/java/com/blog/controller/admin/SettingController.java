@@ -19,34 +19,34 @@ public class SettingController {
     private SettingService settingService;
 
     @RequestMapping("")
-    public String setting(HttpServletRequest request){
-        List<Option> list=settingService.findAll();
+    public String setting(HttpServletRequest request) {
+        List<Option> list = settingService.findAll();
         Map<String, String> options = new HashMap<>();
-        for(int i=0;i<list.size();i++){
-            if(list.get(i).getValue()==null)
-                options.put(list.get(i).getName(),"");
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getValue() == null)
+                options.put(list.get(i).getName(), "");
             else
-                options.put(list.get(i).getName(),list.get(i).getValue());
+                options.put(list.get(i).getName(), list.get(i).getValue());
         }
-        request.setAttribute("options",options);
+        request.setAttribute("options", options);
         return "admin/setting";
     }
 
     @RequestMapping("/save")
     @ResponseBody
-    public String setting(@RequestParam Map<String,String> map, HttpServletRequest request){
-        List<Option> list=new ArrayList<>();
+    public String setting(@RequestParam Map<String, String> map, HttpServletRequest request) {
+        List<Option> list = new ArrayList<>();
         //遍历map
-        Iterator<Map.Entry<String,String>> it = map.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry<String,String> entry=it.next();
-            Option option=new Option();
+        Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, String> entry = it.next();
+            Option option = new Option();
             option.setName(entry.getKey());
             option.setValue(entry.getValue());
             list.add(option);
         }
-        int result=settingService.updateByName(list);
-        if(result == list.size())
+        int result = settingService.updateByName(list);
+        if (result == list.size())
             return "success";
         else
             return "failed";

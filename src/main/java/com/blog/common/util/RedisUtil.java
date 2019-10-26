@@ -103,7 +103,7 @@ public class RedisUtil {
      */
     public boolean set(final String key, Object value, Long expireTime) {
         boolean result = false;
-        Jedis jedis=null;
+        Jedis jedis = null;
         try {
 
             ValueOperations<Serializable, Object> operations = redisTemplate
@@ -113,7 +113,7 @@ public class RedisUtil {
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
 
         }
         return result;

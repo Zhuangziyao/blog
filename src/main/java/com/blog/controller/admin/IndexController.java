@@ -18,40 +18,41 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class IndexController {
 
-	@Autowired
-	private IndexService indexService;
+    @Autowired
+    private IndexService indexService;
 
-	@Autowired
-	private MetaService metaService;
+    @Autowired
+    private MetaService metaService;
 
-	@Autowired
-	private LogService logService;
+    @Autowired
+    private LogService logService;
 
-	@Autowired
-	private AttachService attachService;
+    @Autowired
+    private AttachService attachService;
 
-	@Autowired
-	private CommentService commentService;
-	@RequestMapping("/dashboard")
-	@ResponseBody
-	public Map<String,Object> adminIndex(HttpServletRequest request) {
-		int articleCount=indexService.getArticlesCount();//文章数量
-		int linkCount=metaService.findCountByType("link");//友链数量
-		int attachCount=attachService.findCount();//附件数量
-		int commentCount=commentService.findCount();//评论数量
-		List<Article> articles=indexService.findArticleOrderByCreate();//获取最新文章
-		List<Comment> comments=commentService.findOrderByCreate();//获取最新留言
-		List<Log> logs=logService.findOrderByCreate();//获取最新日志
-		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("articleCount",articleCount);
-		map.put("linkCount",linkCount);
-		map.put("attachCount",attachCount);
-		map.put("commentCount",commentCount);
-		map.put("articles",articles);
-		map.put("logs",logs);
-		map.put("comments",comments);
+    @Autowired
+    private CommentService commentService;
 
-		return map;
-	}
+    @RequestMapping("/dashboard")
+    @ResponseBody
+    public Map<String, Object> adminIndex(HttpServletRequest request) {
+        int articleCount = indexService.getArticlesCount();//文章数量
+        int linkCount = metaService.findCountByType("link");//友链数量
+        int attachCount = attachService.findCount();//附件数量
+        int commentCount = commentService.findCount();//评论数量
+        List<Article> articles = indexService.findArticleOrderByCreate();//获取最新文章
+        List<Comment> comments = commentService.findOrderByCreate();//获取最新留言
+        List<Log> logs = logService.findOrderByCreate();//获取最新日志
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("articleCount", articleCount);
+        map.put("linkCount", linkCount);
+        map.put("attachCount", attachCount);
+        map.put("commentCount", commentCount);
+        map.put("articles", articles);
+        map.put("logs", logs);
+        map.put("comments", comments);
+
+        return map;
+    }
 
 }

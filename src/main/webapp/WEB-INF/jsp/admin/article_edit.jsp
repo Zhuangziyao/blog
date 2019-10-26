@@ -4,35 +4,35 @@
 <%@ page import="com.blog.common.util.common" %>
 <%@ page import="com.blog.model.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<% String path=request.getContextPath();%>
+         pageEncoding="UTF-8" %>
+<% String path = request.getContextPath();%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>文章发布</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>文章发布</title>
     <link rel="shortcut icon" href="<%=path %>/static/admin/images/favicon.ico" type="image/x-icon"/>
-<link href="<%=path%>/static/admin/plugins/tagsinput/jquery.tagsinput.css" rel="stylesheet"/>
-<link href="<%=path%>/static/admin/plugins/select2.dist.css/select2-bootstrap.css" rel="stylesheet"/>
-<link href="<%=path%>/static/admin/plugins/toggles/toggles.css" rel="stylesheet"/>
-<link href="//cdn.bootcss.com/multi-select/0.9.12/css/multi-select.css" rel="stylesheet"/>
-<link href="//cdn.bootcss.com/select2/3.4.8/select2.min.css" rel="stylesheet"/>
-<link href="<%=path%>/static/admin/plugins/md/css/style.css" rel="stylesheet"/>
-<link href="<%=path%>/static/admin/plugins/editor.md-master/css/editormd.css" rel="stylesheet" />
-<style>
-    #tags_tagsinput {
-        background-color: #fafafa;
-        border: 1px solid #eeeeee;
-    }
+    <link href="<%=path%>/static/admin/plugins/tagsinput/jquery.tagsinput.css" rel="stylesheet"/>
+    <link href="<%=path%>/static/admin/plugins/select2.dist.css/select2-bootstrap.css" rel="stylesheet"/>
+    <link href="<%=path%>/static/admin/plugins/toggles/toggles.css" rel="stylesheet"/>
+    <link href="//cdn.bootcss.com/multi-select/0.9.12/css/multi-select.css" rel="stylesheet"/>
+    <link href="//cdn.bootcss.com/select2/3.4.8/select2.min.css" rel="stylesheet"/>
+    <link href="<%=path%>/static/admin/plugins/md/css/style.css" rel="stylesheet"/>
+    <link href="<%=path%>/static/admin/plugins/editor.md-master/css/editormd.css" rel="stylesheet"/>
+    <style>
+        #tags_tagsinput {
+            background-color: #fafafa;
+            border: 1px solid #eeeeee;
+        }
 
-    #tags_addTag input {
-        width: 100%;
-    }
+        #tags_addTag input {
+            width: 100%;
+        }
 
-    #tags_addTag {
-        margin-top: -5px;
-    }
-</style>
+        #tags_addTag {
+            margin-top: -5px;
+        }
+    </style>
 </head>
 <body class="fixed-left">
 <jsp:include page="header.jsp"/>
@@ -43,12 +43,12 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h4 class="page-title">
-                            <% Article article=(Article) request.getAttribute("article");
-                             if(article!=null){ %>
-                                编辑文章
-                             <% }else{ %>
-                                发布文章
-                             <% } %>
+                            <% Article article = (Article) request.getAttribute("article");
+                                if (article != null) { %>
+                            编辑文章
+                            <% } else { %>
+                            发布文章
+                            <% } %>
                         </h4>
                     </div>
                     <div class="col-md-12">
@@ -69,7 +69,7 @@
                                    value="<%=article!=null?article.getAllowFeed():"true"%>"
                                    id="allow_feed"/>
                             <input type="hidden" name="content" id="content-editor"/>
-                            <%User user=(User)request.getSession().getAttribute("user");%>
+                            <%User user = (User) request.getSession().getAttribute("user");%>
                             <input type="hidden" name="authorId" id="author_id"
                                    value="<%=user.getuId()%>"/>
                             <div class="form-group col-md-6" style="padding: 0 10px 0 0;">
@@ -92,21 +92,25 @@
                             <div class="form-group col-md-6">
                                 <select id="multiple-sel" class="select2 form-control"
                                         data-placeholder="请选择分类...">
-                                    <% if(article==null||article.getCategories()==null){
-                                        List<Meta> metas=(List<Meta>)request.getAttribute("categories");
-                                        for(int i=0;i<metas.size();i++){ %>
-                                            <option value="<%=metas.get(i).getName()%>"><%=metas.get(i).getName()%></option>
-                                    <%  }
-                                        }else{
-                                        List<Meta> metas=(List<Meta>)request.getAttribute("categories");
-                                            for(int i=0;i<metas.size();i++){
-                                                if(article.getCategories().contains(metas.get(i).getName())){%>
-                                            <option value="<%=metas.get(i).getName()%>" selected="selected"><%=metas.get(i).getName()%></option>
-                                                <% }else{ %>
-                                            <option value="<%=metas.get(i).getName()%>"><%=metas.get(i).getName()%></option>
-                                    <%          }
-                                            }
-                                        } %>
+                                    <% if (article == null || article.getCategories() == null) {
+                                        List<Meta> metas = (List<Meta>) request.getAttribute("categories");
+                                        for (int i = 0; i < metas.size(); i++) { %>
+                                    <option value="<%=metas.get(i).getName()%>"><%=metas.get(i).getName()%>
+                                    </option>
+                                    <% }
+                                    } else {
+                                        List<Meta> metas = (List<Meta>) request.getAttribute("categories");
+                                        for (int i = 0; i < metas.size(); i++) {
+                                            if (article.getCategories().contains(metas.get(i).getName())) {%>
+                                    <option value="<%=metas.get(i).getName()%>"
+                                            selected="selected"><%=metas.get(i).getName()%>
+                                    </option>
+                                    <% } else { %>
+                                    <option value="<%=metas.get(i).getName()%>"><%=metas.get(i).getName()%>
+                                    </option>
+                                    <% }
+                                    }
+                                    } %>
                                 </select>
                             </div>
                             <div class="clearfix"></div>
@@ -115,7 +119,8 @@
                                           class="markdown-textarea"><%=article!=null&&article.getContent()!=null?article.getContent():""%></textarea>
                             </div>--%>
                             <div id="content-editormd" class="form-group">
-                                <textarea style="height:450px" class="form-control" id="text" name="content-editormd-markdown-doc"><%=article!=null&&article.getContent()!=null?article.getContent():""%></textarea>
+                                <textarea style="height:450px" class="form-control" id="text"
+                                          name="content-editormd-markdown-doc"><%=article != null && article.getContent() != null ? article.getContent() : ""%></textarea>
                             </div>
                             <div class="form-group col-md-3 col-sm-4">
                                 <label class="col-sm-4">开启评论</label>
@@ -175,13 +180,13 @@
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js"></script>
 <script type="text/javascript" src="<%=path%>/static/admin/plugins/editor.md-master/editormd.min.js"></script>
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         editormd("content-editormd", {
-            width   : "100%",
-            height  : 450,
-            syncScrolling : "single",
-            path    : "<%=request.getContextPath()%>/static/admin/plugins/editor.md-master/lib/",
-            saveHTMLToTextarea : true, // 保存HTML到Textarea
+            width: "100%",
+            height: 450,
+            syncScrolling: "single",
+            path: "<%=request.getContextPath()%>/static/admin/plugins/editor.md-master/lib/",
+            saveHTMLToTextarea: true, // 保存HTML到Textarea
         });
     });
     // Tags Input
@@ -212,7 +217,7 @@
     });
 
     //保存文章
-    function subArticle(status){
+    function subArticle(status) {
         var title = $('#articleForm input[name=title]').val();
         var content = $('#text').val();
         if (title == '') {
@@ -228,16 +233,16 @@
         $("#articleForm #categories").val($('#multiple-sel').val());
         var params = $("#articleForm").serialize();
         $.ajax({
-            type:'POST',
-            data:params,
-            url:'../../admin/article/modify',
-            success:function(data){
-                if(data=='success'){
+            type: 'POST',
+            data: params,
+            url: '../../admin/article/modify',
+            success: function (data) {
+                if (data == 'success') {
                     alert('保存文章成功');
-                    window.location.href='../../admin/article';
+                    window.location.href = '../../admin/article';
                 }
             },
-            error:function(XMLHttpRequest, textStatus, errorThrown) {
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
                 // 状态码
                 console.log(XMLHttpRequest.status);
                 // 状态
@@ -248,7 +253,7 @@
         })
     }
 
-    function allow_ping(obj){
+    function allow_ping(obj) {
         var this_ = $(obj);
         var on = this_.find('.toggle-on.active').length;
         var off = this_.find('.toggle-off.active').length;
@@ -260,7 +265,7 @@
         }
     }
 
-    function allow_feed(obj){
+    function allow_feed(obj) {
         var this_ = $(obj);
         var on = this_.find('.toggle-on.active').length;
         var off = this_.find('.toggle-off.active').length;
@@ -272,7 +277,7 @@
         }
     }
 
-    function allow_comment(obj){
+    function allow_comment(obj) {
         var this_ = $(obj);
         var on = this_.find('.toggle-on.active').length;
         var off = this_.find('.toggle-off.active').length;
@@ -283,7 +288,6 @@
             $('#allow_comment').val(true);
         }
     }
-
 
 
 </script>

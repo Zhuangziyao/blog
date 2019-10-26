@@ -19,12 +19,12 @@ public class RelationshipServiceImpl implements RelationshipService {
 
     @Override
     public int insert(int cid, int mid) {
-        return relationshipMapper.insert(cid,mid);
+        return relationshipMapper.insert(cid, mid);
     }
 
     @Override
-    public int delete(int cid,int mid) {
-        return relationshipMapper.delete(cid,mid);
+    public int delete(int cid, int mid) {
+        return relationshipMapper.delete(cid, mid);
     }
 
     @Override

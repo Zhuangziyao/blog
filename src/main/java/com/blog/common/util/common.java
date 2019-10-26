@@ -30,6 +30,7 @@ public class common {
 
     /**
      * 随机数
+     *
      * @param min
      * @param max
      * @return

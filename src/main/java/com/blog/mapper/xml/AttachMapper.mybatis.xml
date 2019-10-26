@@ -29,7 +29,7 @@
                 created,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="fname != '' and fname != null">
                 #{fname},
             </if>
@@ -47,11 +47,11 @@
             </if>
         </trim>
     </insert>
-    
+
     <select id="findAll" resultMap="attachMap">
         select * from t_attach
     </select>
-    
+
     <select id="findCount" resultType="int">
         select count(*) from t_attach
     </select>
